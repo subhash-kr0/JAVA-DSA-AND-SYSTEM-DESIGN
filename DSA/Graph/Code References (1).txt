@@ -1,0 +1,79 @@
+1. Kth Largest Element in an Array
+time complexity: O(n log k)
+space complexity: O(n)
+
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for(int num: nums){
+            heap.add(num);
+            if(heap.size() > k){
+            heap.remove();
+        }
+        }
+        
+        return heap.peek();
+    }
+}
+
+2. Kth Smallest Element in a Sorted Matrix
+time complexity: O(K^2 log K)
+space complexity: O(K)
+
+from heapq import heappush, heappop
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        n = len(matrix)
+        heap = []
+        result = -1
+        for i in range(min(k, n)):
+            for j in range(min(k, n)):
+                heappush(heap, matrix[i][j])
+        
+        for _ in range(k):
+            result = heappop(heap)
+        return result
+
+
+3. Kth Closest Points to the origin
+time complexity: O(n log n)
+space complexity: O(n)
+class Solution {
+    public class Point implements Comparable<Point>{
+        int x;
+        int y;
+        int distance;
+        int i;
+
+        // constructor
+        public Point(int x, int y, int distance, int i){
+            this.x = x;
+            this.y = y;
+            this.distance = distance;
+            this.i = i;
+        }
+
+        @Override
+        public int compareTo(Point p2){
+            // ascending order
+            return this.distance - p2.distance;
+        }
+    }
+    
+    public int[][] kClosest(int[][] points, int k) {
+        PriorityQueue<Point> pq = new PriorityQueue<>();
+        for(int i=0; i<points.length; i++){
+            int distance = (points[i][0]*points[i][0] + points[i][1]*points[i][1]);
+            pq.add(new Point(points[i][0], points[i][1], distance, i));
+        }
+
+        int[][] result = new int[k][];
+        for(int i=0; i<k; i++){
+            Point point = pq.remove();
+            result[i] = new int[]{points[point.i][0], points[point.i][1]};
+        }
+
+        return result;
+        
+    }
+}

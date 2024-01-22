@@ -1,0 +1,37 @@
+Problem 1: Alternate Sum Series in Recursion
+
+Problem 2: Search in 2D Matrix
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        // number of rows
+        int m = matrix.length;
+        if(m == 0){
+            return false;
+        }
+
+        // number of columns
+        int n = matrix[0].length;
+
+        // binary search algorithm
+        int low = 0, high = m * n - 1;
+        int midIdx, midElement;
+        while(low <= high){
+            midIdx = low + (high - low)/2;
+            midElement = matrix[midIdx / n][midIdx % n];
+            if(target == midElement){
+                return true;
+            }
+            else{
+                if(target < midElement){
+                    // left side
+                    high = midIdx - 1;
+                }
+                else{
+                    low = midIdx + 1;
+                }
+            }
+        }
+        return false;
+    }
+}
+

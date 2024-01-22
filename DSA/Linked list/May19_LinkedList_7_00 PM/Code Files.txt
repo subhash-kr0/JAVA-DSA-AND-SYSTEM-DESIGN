@@ -1,0 +1,126 @@
+LinkedList Cycle
+
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null){
+            return false;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+        int flag = 0;
+
+        while(slow != null && fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                flag = 1;
+                break;
+            }
+        }
+
+        if(flag == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}
+
+
+Palindrome in LinkedList
+
+Assignment: How can we reduce this further to space complexity as O(1)
+
+Time complexity: O(n)
+Space complexity: O(n)
+
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> vals = new ArrayList<>();
+
+        // Convert the linkedlist into arraylist
+        ListNode current = head;
+        while(current != null){
+            vals.add(current.val);
+            current = current.next;
+        }
+
+
+        // Two Pointer Approach used to check the palindrome
+        int low = 0;
+        int high = vals.size() - 1;
+        while(low < high){
+            if(!vals.get(low).equals(vals.get(high))){
+                return false;
+            }
+            low = low + 1;
+            high = high - 1;
+        }
+        return true;
+    }
+}
+
+
+Reversal in Linked List
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode current = head;
+        ListNode prev = null;
+        ListNode nextPtr = null;
+
+        while(current != null){
+            nextPtr = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextPtr;
+        }
+
+        head = prev;
+        return head;
+    }
+}
+
+
+
+
+Reverse Linked List ||
+
+ public ListNode reverseBetween(ListNode head, int left, int right) {
+        if(head == null){
+            return null;
+        }
+
+        ListNode current = head, prev = null;
+
+        // Move the pointers to its current position in the linked list
+        while(left > 1){
+            prev = current;
+            current = current.next;
+            left = left - 1;
+            right = right - 1;
+        }
+        
+        ListNode con = prev, tail = current;
+
+        ListNode nextPtr = null;
+        while(right > 0){
+            nextPtr = current.next;
+            current.next = prev;
+            prev = current;
+            current = nextPtr;
+            right = right - 1;
+        }
+
+        if(con != null){
+            con.next = prev;
+        }
+        else{
+            head = prev;
+        }
+
+        tail.next = current;
+        return head;
+
+    }

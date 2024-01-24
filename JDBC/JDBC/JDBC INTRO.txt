@@ -1,0 +1,82 @@
+++++++++
+JDBC API
+++++++++
+=> It is an API given by SUNMS to interact with the database.
+=> To interact with the database SUNMS had given a jar called rt.jar which is
+available for the programmer during the installation of jdk s/w.
+=> To use JDBC in java program we take the support of a package called
+"java.sql.*" and "javax.sql.*".
+=> API refers to set of rules and guideliness which has interfaces.
+=> To get the implementation for these interface abstract methods we need to take
+the help of "DB-Vendor".
+=> DB-Vendor will give the implementation for "SRS" and release those
+implementation classes in the form of "jars" to the java
+develop community people.
+=> Depending upon the database we use in our project we need to use the respective
+jars supplied by "DB-Vendor".
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++
+Steps given by SUNMS to interact with Database
+++++++++++++++++++++++++++++++++++++++++++++++
+1. Load and register the driver
+2. Establish the Connection
+3. Create Statement/PreparedStatement/CallableStatement to transfer the query.
+4. Execute the query
+5. Process the result
+6. close the resources
+7. Handle SQLExceptions if it occurs.
+
+
+
+
+
+
+
+
+
+
+
+
+To execute select Query we need to use
+public ResultSet executeQuery(String sqlQuery) throws SQLException
+
+
+To execute non-select query like insert,update,delete we need to use
+public int executeUpdate(String sqlNonSelectQuery) throws SQLException
+
+
+
+
+
+
+
+
+
+
+
+
+
+We can write the Query in three ways:
+1.Statement
+ 
+PreparedStatement provides better performance than Statement object 
+
+2.Prepared Statement
++++++++++++++++++
+PreparedStatement
++++++++++++++++++
+ => These statements are used to transfer the query during the compilation only.
+ => These statements are also called as Pre-Compiled Query.
+ => Performance of these object are high compared to Statement object.
+ => In case of PreparedStatement the query will be incomplete and the values will be injected to the query at the runtime.
+ => Values to the PreparedStatement object will be injected using setXXXXX(int pos,xxxxx value) throws SQLException method.
+
+3. callable statement:
+
+Statements is used to execute standard SQL queries, PreparedStatement is used to execute bind or dynamic queries, and CallableStatement is used to call the stored procedure from Java.

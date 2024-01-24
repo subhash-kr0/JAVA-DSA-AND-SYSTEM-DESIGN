@@ -1,0 +1,215 @@
+part1::Make a properties file and store the following:
+      url=jdbc:mysql:///studentinfo             
+      user=root
+      password=Vikram123@
+
+
+part2: Make a package where you will create one class and inside that you will have two methods in it.(Name the class as JDBCUtil):
+
+1. start where you will connect the mysql. 
+
+public static Connection  getJdbcConnection() throws SQLException, IOException{
+		
+		
+		//STEP1: take the data from the Properties File
+		FileInputStream fis = new FileInputStream("Application.properties");
+		Properties P =new Properties();
+		P.load(fis);
+     
+	String url=P.getProperty("url");
+	String user= P.getProperty("user");
+	String password = P.getProperty("password");
+	
+	//just to confirm if the properties came here we will just do the below code
+	
+	System.out.println(url);
+	System.out.println(user);
+	System.out.println(password);
+
+           //STEP2: establish the connection 
+	Connection connection = DriverManager.getConnection(url, user, password);
+
+	
+	return connection;
+	
+	
+	}
+
+
+2. you will close all the resources.
+
+public static void cleanUp(Connection con ,PreparedStatement statement,ResultSet resultset) throws SQLException {
+		//step 6 
+	if(con!=null) {
+		con.close();
+	}
+	if(statement != null) {
+		statement.close();
+	}
+    if(resultset != null) {
+    	resultset.close();
+    }
+	}
+
+part3: create one more package here we will perform CRUD operations:
+
+here create a class name the class as CRUDAPP: public class CRUDApp{
+
+	public static void main(String[] args) {
+		
+		
+		// Connection has been created
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		
+		
+		
+
+	
+		
+		// this is for insert Query
+		try {
+	
+		connection =JDBCUtil.getJdbcConnection();
+		
+		String sqlInsertQuery= "insert into student(name,rollNo,result) values(?,?,?)";
+		
+		if(connection != null) {
+			preparedStatement =connection.prepareStatement(sqlInsertQuery);
+			
+			if(preparedStatement != null) {
+				//set values 
+				
+				preparedStatement.setString(1,"Chirag");
+				preparedStatement.setInt(2, 12);
+				preparedStatement.setString(3, "P");
+              
+				//execute the Query
+				int rowupdated = preparedStatement.executeUpdate();
+				
+				System.out.println("Number of row updated :: " + " " + rowupdated);
+				
+			}
+		}
+		}
+//		
+		// this is the Query to select a specific row by passing ID
+//		try {
+//			connection = JDBCUtil.getJdbcConnection();
+//			String sqlSelectQuery = "select * from student where id=? ";
+//			if (connection != null) {
+//				Scanner scan = new Scanner(System.in);
+//
+//				System.out.println("Enter the id of the student which you would like to Select");
+//
+//				int id = scan.nextInt();
+//
+//				preparedStatement = connection.prepareStatement(sqlSelectQuery);
+//
+//				preparedStatement.setInt(1, id);
+//				
+//				ResultSet RS=preparedStatement.executeQuery();
+//				
+//			if(RS!=null) {
+//				if(RS.next()) {
+//				System.out.println("ID\tNAME\trollNo\tResult");
+//				System.out.println(RS.getInt(1)+"\t"+ RS.getString(2)+"\t"+RS.getInt(3)+"\t" + RS.getString(4));
+//				}
+//				
+//			}else {
+//				System.out.println("Record not Found");
+//			}
+//
+//				
+//			}
+//		}
+		
+		
+
+		// this is the Query To Update your row by giving specific id
+
+//		try {
+//			connection =JDBCUtil.getJdbcConnection();
+//			String sqlQuery= "update student set result=? where id=?";
+//			
+//			if(connection!=null) {
+//				Scanner scan = new Scanner(System.in);
+//				
+//				System.out.println("Enter the id of the student which you would like to update");
+//				
+//				int id=scan.nextInt();
+//				
+//				System.out.println("Enter the new result");
+//				
+//				String result=scan.next();
+//				preparedStatement =connection.prepareStatement(sqlQuery);
+//				
+//				preparedStatement.setString(1, result);
+//				preparedStatement.setInt(2, id);
+//				
+//				int rowupdated = preparedStatement.executeUpdate();
+//				System.out.println("Number of row updated :: " + " " + rowupdated);
+//				
+//		}
+//		}
+		
+		
+		
+		
+		
+		
+		// this is the Query to Delete a specific row by passing ID
+//		try {
+//			connection =JDBCUtil.getJdbcConnection();
+//		String sqlDeleteQuery= "delete from student where id=?";
+//		if(connection!=null) {
+//			Scanner scan = new Scanner(System.in);
+//			
+//			System.out.println("Enter the id of the student which you would like to Delete");
+//			
+//			int id=scan.nextInt();
+//			
+//			
+//			preparedStatement =connection.prepareStatement(sqlDeleteQuery);
+//			
+//	
+//			preparedStatement.setInt(1, id);
+//			
+//			int rowupdated = preparedStatement.executeUpdate();
+//			System.out.println("Number of row updated :: " + " " + rowupdated);
+//		}
+//		}
+
+		
+		
+		
+		
+
+		
+		
+			
+			
+			
+		catch (IOException e) {
+			e.printStackTrace();
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} catch (Exception ee) {
+			ee.printStackTrace();
+		}
+
+		finally {
+			try {
+				JDBCUtil.cleanUp(connection, preparedStatement, null);
+				System.out.println("Closing my resource");
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+	}
+
+}
+
+
+

@@ -1,0 +1,11 @@
+	connection=JDBCUtil.getJdbcConnection();
+
+	statement=connection.createStatement();
+	String sqlInsertQuery="insert into student(name,rollNum,result) values('Vikram',123,'pass')";
+	int roweffected = statement.executeUpdate(sqlInsertQuery);
+
+
+
+
+
+     

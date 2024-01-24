@@ -1,0 +1,29 @@
+	try {
+// Getting the connection
+connection = JDBCUtil. getJdbcConnection() ;
+String sqlInsertQuery = "insert into student(name,dob) values(?,?)"
+	if (connection != null)
+	pstmt = connection.prepareStatement(sqlInsertQuery);
+	if (pstmt != null) {
+		scanner = new Scanner(System.in);
+		System.out.print("Enter the value of sname :: ");
+		String sname = scanner.next();
+				
+		System.out.print("Enter the value of dob(dd-mm-yyyy) :: ");
+
+		String dob = scanner.next();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		Date utilDate = sdf.parse(dob);
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+// Setting the values for PreparedStatement
+			pstmt.setString(1, sname);
+			pstmt.setDate(2, sqlDate);
+			int rowAffected = pstmt.executeUpdate();
+			if (rowAffected == 1) {
+				System.out.println("Insertion succesfull");
+			} else {
+				System.out.println("Record not inserted todatabase...");
+
+				}
+			}

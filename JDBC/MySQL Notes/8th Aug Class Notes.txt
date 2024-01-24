@@ -1,0 +1,140 @@
+DB theory:
+When we had data in old days we use to store it in note books or in the record form.
+but later as the number of person and data increased we went to excel sheet etc. to store data.
+
+But as the population increased in human mankind we started struggling to store large data in excel so software developers like us came into a picture with a solution of something they call DBMS.(Data BAse Management System).
+
+Company like --->Oracle/Sybase/Microsoft  etc..  started building DBMS software and launced into market.
+
+Before DMBS was only individual concept where you can just store data 
+
+
+after that software connecting came into picture.
+
+They said that you can establised a connection using your software and you can store the data in our DBMS .
+
+Example:  Banking details/ ticket booking App etc. they will collect data from user using UI and your software will establised a connection and store the data in your DBMS.
+
+here in DBMS === we store data in a form of rows and columns (Table).
+
+Name     Age      DOB              City
+vik      22     1-1-2001         Chennai
+tilak    20     1-1-2003          Bangalore
+nitin    25     1-1-1997           Goa
+
+there was a drawback.
+Because it is difficult to maintain the data of a person  in a single row .
+
+
+So the demand of RDBMS concept came in to the picture (Relational DBMS):
+
+Here the large data is maintain by multiple number of table and that tables are connceted to each other using foreign key and primary key concept.
+Id    Name     Age      DOB              City                                CourseId    CourseName      
+01    vik      22     1-1-2001         Chennai           RDBMS                   01       Java
+02    tilak    20     1-1-2003          Bangalore     ------------>              01       Java 
+03    nitin    25     1-1-1997           Goa                                     03       Python
+
+
+
+In DBMS we have two concept:
+
+1.RDBMS------SQL.(Structured Query Language)
+     Some Software in RDBMS are: MySql/SQLlite/PostSql/Oracle Server.--->98% same 2% changes.
+
+2.NoSQL.
+      Some Software which are NoSql are :  MongoDB/Hbase/Cassandra it deals with Big Data concepts here it wont be in a form of tables rather it will be in a (Key-Value,Docs.Graph) etc..
+
+Mostly Java Developer will deals with the concept of RDBMS:
+
+We will use Mysql Software.
+ 1. It is easy to understand.
+ 2. Not a case sensitive .
+ 3. We need to learn only CRUD operation (Query).
+
+
+Download the Software link---->https://dev.mysql.com/downloads/installer/
+
+step1: go to the above link.
+step2: select the Operating System as ------> Microsoft Windows.
+step3: select second which has more memory like 331.3M.
+step4: click on ------> download button.
+step5: scroll down the click on -------> No thanks, just start my download.
+
+
+Now do the setup by the following methods.
+
+we need three things to setup our MYSQL:
+1.Server.
+2.Workbech.
+3.Shell.
+
+step1: Instal and open the UI of your Mysql Installer.
+step2: select -----> Custom.
+step3: click on MYSQL Servers --> MYSQL Server ---> MySQl Server 8.0.34 ----> MySQl Server 8.0.34-*64  after that click on arrow(->).
+step4: Now click on Applications ---> MySQL Workbench 8.0 ----> MySQL Workbench 8.0.34*64  after that click on arrow(->).
+step5: Now Click on MySQL Shell --->  MySQL Shell 8.0 ----->  MySQL Shell 8.0.34 *64  after that click on arrow(->).
+
+
+Once you do all this click on Next.
+After that click on Execute. then click on Next---Next 
+
+Now you will reach a UI were you need to setup your MySQL Root Password  = xxxxxxxxxx.
+                                                      Repeat Password  = xxxxxxxxxx.  
+
+Once you set the password Click on Next again click on Next --> Finally Click on Execute.  
+
+INSERT INTO studentinfo VALUES(1, 'vikram', 'khandelwal','S', 24, 'Bengaluru');
+
+INSERT INTO studentinfo (id, firstname, middlename, lastname,age, city)
+VALUES(1, 'vikram','khandelwal','S', 24, 'Bengaluru');
+
+INSERT INTO studentinfo (id, firstname, lastname,age, city)
+VALUES(1, 'vikram','S', 24, 'Bengaluru');
+INSERT INTO studentinfo (id, firstname, lastname,age, city)
+VALUES(?,?,?,?,?);
+
+CREATE TABLE EMPLOYEE(
+id int(5) NOT NULL,
+firstname varchar(20) NOT NULL,
+middlename varchar(20),
+lastname varchar(20)NOT NULL,
+salary int(7) NOT NULL
+);
+
+INSERT INTO employee (id, firstname, middlename, lastname,salary)
+VALUES(1, 'hyder','abbas','najafi', 28);
+
+CREATE TABLE newStudents(
+id int(5) auto_increment primary key,
+firstname varchar(20) NOT NULL,
+middlename varchar(20),
+lastname varchar(20)NOT NULL,
+age int(3) NOT NULL
+);
+
+
+select * from studentinfo;
+
+CREATE TABLE newStudents(
+id INT(5) AUTO_INCREMENT PRIMARY KEY,
+firstname varchar(20) NOT NULL,
+middlename varchar(20),
+lastname varchar(20)NOT NULL,
+age int(3) NOT NULL
+);
+
+INSERT INTO newstudent1 VALUES(1,'rohan', 'hirani', 'm', 18);
+
+create table Student(
+id int(5) PRIMARY KEY,
+firstname varchar(40) NOT NULL,
+lastname varchar(40) NOT NULL,
+age int(3) NOT NULL,
+city varchar(20)NOT NULL,
+country varchar(20) NOT NULL
+
+)
+
+
+
+

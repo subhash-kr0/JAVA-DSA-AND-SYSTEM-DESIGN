@@ -1,0 +1,6 @@
+
+Step1:
+use studentinfo;
+create table student(id int(3) primary key auto_increment,name varchar(10),rollnum int(10),result varchar(10));
+
+now start the program :
